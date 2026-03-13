@@ -5,7 +5,10 @@ export type PageMemo = {
   updatedAt: number;
 };
 
-const keyFromUrl = (url: string) => `memo:${url}`;
+const keyFromUrl = (url: string) => {
+  const parsedUrl = new URL(url);
+  return `memo:${parsedUrl.hostname}`;
+};
 
 export const loadMemoByUrl = async (url: string): Promise<PageMemo | null> => {
   const key = keyFromUrl(url);
